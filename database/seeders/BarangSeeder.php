@@ -17,7 +17,7 @@ class BarangSeeder extends Seeder
     
         $data = [
             [
-                'kategori_id' => 'SBA',
+                'kategori_id' => 1,
                 'barang_kode' => 'SBA-001',
                 'barang_nama' => 'Beras Premium 5kg',
                 'harga_beli' => 50000,
@@ -26,7 +26,7 @@ class BarangSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'kategori_id' => 'SBA',
+                'kategori_id' => 1,
                 'barang_kode' => 'SBA-002',
                 'barang_nama' => 'Minyak Goreng 2L',
                 'harga_beli' => 30000,
@@ -35,7 +35,7 @@ class BarangSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'kategori_id' => 'MNM',
+                'kategori_id' => 2,
                 'barang_kode' => 'MNM-001',
                 'barang_nama' => 'Air Mineral 600ml',
                 'harga_beli' => 3000,
@@ -44,7 +44,7 @@ class BarangSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'kategori_id' => 'SNK',
+                'kategori_id' => 3,
                 'barang_kode' => 'SNK-004',
                 'barang_nama' => 'Keripik Kentang 100g',
                 'harga_beli' => 10000,
@@ -53,7 +53,7 @@ class BarangSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'kategori_id' => 'SGR',
+                'kategori_id' => 4,
                 'barang_kode' => 'SGR-002',
                 'barang_nama' => 'Apel Fuji 1kg',
                 'harga_beli' => 25000,
@@ -62,7 +62,7 @@ class BarangSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'kategori_id' => 'RTG',
+                'kategori_id' => 5,
                 'barang_kode' => 'RTG-006',
                 'barang_nama' => 'Sabun Cuci Piring 800ml',
                 'harga_beli' => 15000,
@@ -71,7 +71,7 @@ class BarangSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'kategori_id' => 'MNM',
+                'kategori_id' => 2,
                 'barang_kode' => 'MNM-007',
                 'barang_nama' => 'Teh Celup 25pcs',
                 'harga_beli' => 8000,
@@ -80,7 +80,7 @@ class BarangSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'kategori_id' => 'SNK',
+                'kategori_id' => 3,
                 'barang_kode' => 'SNK-008',
                 'barang_nama' => 'Roti Tawar Gandum',
                 'harga_beli' => 12000,
@@ -89,7 +89,7 @@ class BarangSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'kategori_id' => 'RTG',
+                'kategori_id' => 5,
                 'barang_kode' => 'RTG-009',
                 'barang_nama' => 'Sikat Gigi 2pcs',
                 'harga_beli' => 7000,
@@ -98,7 +98,7 @@ class BarangSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'kategori_id' => 'SGR',
+                'kategori_id' => 4,
                 'barang_kode' => 'SGR-010',
                 'barang_nama' => 'Jeruk Medan 1kg',
                 'harga_beli' => 20000,
