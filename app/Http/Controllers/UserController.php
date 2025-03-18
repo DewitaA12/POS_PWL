@@ -27,4 +27,10 @@ class UserController extends Controller
         dd($user);
         return view('user', ['data' => $user]);
     }
+
+    public function jumlahPengguna()
+    {
+        $jumlahPengguna = UserModel::where('level_id', 2)->count();
+        return view('jumlahUser', ['jumlahPengguna' => $jumlahPengguna]);
+    }
 }
