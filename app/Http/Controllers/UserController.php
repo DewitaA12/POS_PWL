@@ -23,8 +23,16 @@ class UserController extends Controller
         //$user = UserModel::where('username', 'manager9')->firstorFail();
 
         //Retrieving Agregrates
-        $user = UserModel::where('level_id',2)->count();
-        dd($user);
+        // $user = UserModel::where('level_id',2)->count();
+        // dd($user);
+
+        //Retrieving or Creating Model
+        $user = UserModel :: firstOrCreate(
+            [
+            'username' => 'manager',
+            'nama' => 'Manager',
+            ],
+        );
         return view('user', ['data' => $user]);
     }
 
