@@ -17,3 +17,4 @@ Route::get('/kategori', [KategoriController::class, 'index']);
 Route::get('/user', [UserController::class, 'index']);
 Route::get('/jumlah-pengguna', [UserController::class, 'jumlahPengguna']);
 Route::get('/', [WelcomeController::class, 'index']);
+Route::get('/POS_PWL/public/user/tambah', [UserController::class, 'tambah']);
