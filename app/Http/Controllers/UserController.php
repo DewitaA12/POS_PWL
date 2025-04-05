@@ -15,14 +15,32 @@ class UserController extends Controller
        return view('user', ['data' => $user]);
     }
 
+    public function tambah()
+    {
+        return view('user_tambah');
+    }
+
     public function jumlahPengguna()
     {
         $jumlahPengguna = UserModel::where('level_id', 2)->count();
         return view('jumlahUser', ['jumlahPengguna' => $jumlahPengguna]);
     }
 
-    public function tambah()
+    public function tambah_simpan(Request $request)
     {
-        return view('user_tambah');
+    UserModel::create([
+        'username' => $request->username,
+        'nama' => $request->nama,
+        'password' => Hash::make($request->password),
+        'level_id' => $request->level_id
+    ]);
+
+    return redirect('/user');
+    }
+
+    public function ubah($id)
+    {
+    $user = UserModel::find($id);
+    return view('user_ubah', ['data' => $user]);
     }
 }

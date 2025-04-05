@@ -2,7 +2,7 @@
 <html>
 <body>
     <h1>Data User</h1>
-    <a href="/POS_PWL/public/user/tambah">Tambah User</a>
+    <a href="{{ url('/user/tambah') }}">+ Tambah User</a>
     <table border="1" cellpadding="2" cellspacing="0">
         <tr>
             <td>ID</td>
