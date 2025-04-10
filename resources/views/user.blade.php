@@ -18,7 +18,7 @@
             <td>{{ $d->nama }}</td>
             <td>{{ $d->level_id }}</td>
             <td>
-                <a href="/user/ubah/{{ $d->user_id }}">Ubah</a> | 
+                <a href="{{ url('/user/ubah/' . $d->user_id) }}">Ubah</a>            | 
                 <a href="/user/hapus/{{ $d->user_id }}">Hapus</a>
             </td>
         </tr>
