@@ -19,7 +19,7 @@
             <td>{{ $d->level_id }}</td>
             <td>
                 <a href="{{ url('/user/ubah/' . $d->user_id) }}">Ubah</a>            | 
-                <a href="/user/hapus/{{ $d->user_id }}">Hapus</a>
+                <a href="{{ url('/user/hapus/' . $d->user_id) }}">Hapus</a>
             </td>
         </tr>
         @endforeach
