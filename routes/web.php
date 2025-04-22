@@ -13,7 +13,8 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('/list', [UserController::class, 'list']); // /user/list
     Route::get('/tambah', [UserController::class, 'tambah']); // /user/tambah
     Route::get('/create', [UserController::class, 'create']); // /user/create
-    Route::get('/{id}/edit', [UserController::class, 'edit']); // /user/create
+    Route::get('/{id}/edit', [UserController::class, 'edit']); // /user/edit
+    Route::get('/{id}', [UserController::class, 'show']); // /user/detail
     Route::post('/', [UserController::class, 'tambah_simpan']); // /user (POST)
     Route::get('/ubah/{id}', [UserController::class, 'ubah']); // /user/ubah/1
     Route::put('/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']); // /user/ubah_simpan/1
