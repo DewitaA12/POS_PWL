@@ -39,7 +39,24 @@ class UserController extends Controller
         return view('user.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
     }
 
+    //Menampilkan detail user
+    public function show(string $id)
+    {
+    $user = UserModel::with('level')->find($id);
 
+    $breadcrumb = (object) [
+        'title' => 'Detail User',
+        'list' => ['Home', 'User', 'Detail']
+    ];
+
+    $page = (object) [
+        'title' => 'Detail user'
+    ];
+
+    $activeMenu = 'user'; // set menu yang sedang aktif
+
+    return view('user.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user, 'activeMenu' => $activeMenu]);
+    }
 
     // Menampilkan halaman form tambah user
     public function create()
