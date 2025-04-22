@@ -14,6 +14,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/tambah', [UserController::class, 'tambah']); // /user/tambah
     Route::get('/create', [UserController::class, 'create']); // /user/create
     Route::get('/{id}/edit', [UserController::class, 'edit']); // /user/edit
+    Route::put('/{id}', [UserController::class, 'update']); // /menyimpan perubahan data user
     Route::get('/{id}', [UserController::class, 'show']); // /user/detail
     Route::post('/', [UserController::class, 'tambah_simpan']); // /user (POST)
     Route::get('/ubah/{id}', [UserController::class, 'ubah']); // /user/ubah/1
