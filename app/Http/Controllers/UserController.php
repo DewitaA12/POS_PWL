@@ -27,7 +27,10 @@ class UserController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Daftar user',
-            'list' => ['Home', 'User']
+            'list' => [
+                ['title' => 'Home', 'url' => '/'],
+                ['title' => 'User ', 'url' => '/user']
+            ],
         ];
         
         $page = (object) [
@@ -46,7 +49,11 @@ class UserController extends Controller
 
     $breadcrumb = (object) [
         'title' => 'Detail User',
-        'list' => ['Home', 'User', 'Detail']
+        'list' => [
+            ['title' => 'Home', 'url' => '/'],
+            ['title' => 'User ', 'url' => '/user'],
+            ['title' => 'Detail', 'url' => '/user/detail']
+        ],
     ];
 
     $page = (object) [
@@ -63,7 +70,11 @@ class UserController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Tambah User',
-            'list' => ['Home', 'User', 'Tambah']
+            'list' => [
+                ['title' => 'Home', 'url' => '/'],
+                ['title' => 'User ', 'url' => '/user'],
+                ['title' => 'Tambah', 'url' => '/user/tambah']
+            ],
         ];
 
         $page = (object) [
@@ -107,9 +118,9 @@ class UserController extends Controller
         $breadcrumb = (object) [
             'title' => 'Edit User',
             'list' => [
-                (object) ['title' => 'Home', 'url' => '/'],
-                (object) ['title' => 'User', 'url' => '/user'],
-                (object) ['title' => 'Edit'],
+                 ['title' => 'Home', 'url' => '/'],
+                 ['title' => 'User', 'url' => '/user'],
+                 ['title' => 'Edit', 'url' => '/user/edit'],
             ],
         ];
 
@@ -119,30 +130,43 @@ class UserController extends Controller
 
         $activeMenu = 'user'; // set menu yang sedang aktif
 
-        return view('user.edit', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user, 'level' => $level, 'activeMenu' => $activeMenu]);
+        return view('user.edit', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user, 
+        'level' => $level, 'activeMenu' => $activeMenu]);
     }
 
-    // Menyimpan perubahan data user
+    
+    // Menyimpan data perubahan user
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'username' => 'required|string|min:3|unique:m_user,username,' . $id, // username harus diisi, berupa string, minimal 3 karakter, dan bernilai unik di tabel m_user kolom username kecuali untuk user dengan id yang sedang diedit
-            'nama' => 'required|string|max:100', // nama harus diisi, berupa string, dan maksimal 100 karakter
-            'password' => 'nullable|min:5', // password bisa diisi (minimal 5 karakter) dan tidak bisa diisi
-            'level_id' => 'required|integer', // level_id harus diisi dan berupa angka
-        ]);
+    // Validate the incoming request data
+    $request->validate([
+        'username' => 'required|string|min:3|unique:m_user,username,' . $id . ',user_id', 
+        'nama' => 'required|string|max:100', // Name must be filled, string, and max 100 characters
+        'password' => 'nullable|string|min:5', // Password can be filled (min 5 characters)
+        'level_id' => 'required|integer', // level_id must be filled and an integer
+    ]);
 
-        UserModel::find($id)->update([
-            'username' => $request->username,
-            'nama' => $request->nama,
-            'password' => $request->password ? Hash::make($request->password) : UserModel::find($id)->password,
-            'level_id' => $request->level_id,
-        ]);
+    // Find the user by user_id
+    $user = UserModel::findOrFail($id); 
 
-        return redirect('/user')->with('success', 'Data user berhasil diubah');
+    // Prepare the data for update
+    $dataToUpdate = [
+        'username' => $request->username,
+        'nama' => $request->nama,
+        'level_id' => $request->level_id,
+    ];
+
+    // Update password only if it is provided
+    if ($request->filled('password')) {
+        $dataToUpdate['password'] = Hash::make($request->password);
     }
 
+    // Update the user
+    $user->update($dataToUpdate);
 
+    // Redirect with success message
+    return redirect('/user')->with('success', 'Data user berhasil diubah');
+    }
 
     public function testRelasi()
     {
