@@ -16,8 +16,15 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('/list', [UserController::class, 'list']); // /user/list
     Route::get('/tambah', [UserController::class, 'tambah']); // /user/tambah
     Route::get('/create', [UserController::class, 'create']); // /user/create
+    Route::post('/',[UserController::class, 'store']);
+    Route::get('/create_ajax', [UserController::class, 'create_ajax']); 
+    Route::post('/ajax',[UserController::class, 'store_ajax']);
     Route::get('/{id}/edit', [UserController::class, 'edit']); // /user/edit
     Route::put('/{id}', [UserController::class, 'update']); // /menyimpan perubahan data user
+    Route::get('/{id}/edit_ajax', [UserController::class, 'edit_ajax']); // /user/edit
+    Route::put('/{id}/update_ajax', [UserController::class, 'update_ajax'])->name('user.update_ajax');
+    Route::get('/{id}/confirm_ajax', [UserController::class, 'confirm_ajax']);
+    Route::delete('/{id}/delete_ajax', [UserController::class, 'delete_ajax']);
     Route::delete('/{id}', [UserController::class, 'destroy']); // Menghapus data user by id
     Route::get('/{id}', [UserController::class, 'show']); // /user/detail
     Route::post('/', [UserController::class, 'tambah_simpan']); // /user (POST)
