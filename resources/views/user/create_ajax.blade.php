@@ -1,6 +1,6 @@
 <form action="{{ url('/user/ajax') }}" method="POST" id="form-tambah">
     @csrf
-    <div class="modal-dialog modal-lg" role="document">
+    <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Tambah Data User</h5>
@@ -8,7 +8,6 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-
             <div class="modal-body">
                 <div class="form-group">
                     <label>Level Pengguna</label>
@@ -20,28 +19,27 @@
                     </select>
                     <small id="error-level_id" class="error-text form-text text-danger"></small>
                 </div>
-
+                
                 <div class="form-group">
                     <label>Username</label>
                     <input type="text" name="username" id="username" class="form-control" required>
                     <small id="error-username" class="error-text form-text text-danger"></small>
                 </div>
-
+                
                 <div class="form-group">
                     <label>Nama</label>
                     <input type="text" name="nama" id="nama" class="form-control" required>
                     <small id="error-nama" class="error-text form-text text-danger"></small>
                 </div>
-
+                
                 <div class="form-group">
                     <label>Password</label>
                     <input type="password" name="password" id="password" class="form-control" required>
                     <small id="error-password" class="error-text form-text text-danger"></small>
                 </div>
             </div>
-
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-secondary">Batal</button>
+                <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
         </div>
@@ -70,9 +68,7 @@ $(document).ready(function() {
                             title: 'Berhasil',
                             text: response.message
                         });
-                        if (typeof datatable !== 'undefined') {
-                            datatable.ajax.reload();
-                        }
+                        dataUser.ajax.reload();
                     } else {
                         $('.error-text').text('');
                         $.each(response.msgField, function(prefix, val) {
@@ -80,7 +76,7 @@ $(document).ready(function() {
                         });
                         Swal.fire({
                             icon: 'error',
-                            title: 'Gagal',
+                            title: 'Terjadi Kesalahan',
                             text: response.message
                         });
                     }

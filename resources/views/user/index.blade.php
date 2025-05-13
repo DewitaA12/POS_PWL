@@ -17,15 +17,20 @@
         <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
 
-        <div class="row mb-3">
-            <div class="col-md-4">
-                <select class="form-control" id="level_id" name="level_id" required>
-                    <option value="">- Semua -</option>
-                    @foreach($level as $item)
-                        <option value="{{ $item->level_id }}">{{ $item->level_nama }}</option>
-                    @endforeach
-                </select>
-                <small class="form-text text-muted">Filter berdasarkan Level</small>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label">Filter:</label>
+                    <div class="col-3">
+                        <select class="form-control" id="level_id" name="level_id" required>
+                            <option value="">- Semua -</option>
+                            @foreach($level as $item)
+                                <option value="{{ $item->level_id }}">{{ $item->level_nama }}</option>
+                            @endforeach
+                        </select>
+                        <small class="form-text text-muted">Level Pengguna</small>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -72,68 +77,74 @@
 @endpush
 
 @push('js')
-<script>
-    function modalAction(url) {
+<script> 
+    function modalAction(url = '') {
         $('#myModal').load(url, function() {
             $('#myModal').modal('show');
         });
     }
 
-    $(document).ready(function () {
-        $(document).on('click', '.btn-modal', function () {
-            var url = $(this).data('url');
-            modalAction(url);
-        });
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        var datatable = $('#table_user').DataTable({
+    var dataUser;
+    $(document).ready(function() {
+        // Inisialisasi DataTable
+        dataUser = $('#table_user').DataTable({
             serverSide: true,
             ajax: {
-                url: "{{ url('user/list') }}",
+                url: "{{ url('user/list') }}", 
+                dataType: "json",
                 type: "POST",
-                data: function (d) {
+                data: function(d) {
                     d.level_id = $('#level_id').val();
                 }
             },
-            autoWidth: true,
             columns: [
-                { data: 'DT_RowIndex', orderable: false, searchable: false },
-                { data: 'username' },
-                { data: 'nama' },
-                { data: 'level' },
                 {
-                    data: 'id',
+                    data: "DT_RowIndex", 
+                    className: "text-center",
                     orderable: false,
-                    searchable: false,
-                    render: function(data, type, row) {
-                        let detailUrl = `{{ url('user/') }}/${row.user_id}`;
-                        let editUrl = `{{ url('user') }}/${row.user_id}/edit`;
-                        let deleteForm = `
-                            <form action="{{ url('user/') }}/${row.user_id}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-                            </form>`;
-
-                        return `
-                            <div class="btn-group-aksi">
-                                <a href="${detailUrl}" class="btn btn-sm btn-info">Detail</a>
-                                <a href="${editUrl}" class="btn btn-sm btn-warning">Edit</a>
-                                ${deleteForm}
-                            </div>`;
-                    }
-
+                    searchable: false
+                },
+                {
+                    data: "username",
+                    className: "", 
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "nama",
+                    className: "", 
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "level.level_nama", 
+                    className: "", 
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: "aksi", 
+                    className: "", 
+                    orderable: false, 
+                    searchable: false
                 }
             ]
         });
 
-        $('#level_id').on('change', function () {
-            datatable.ajax.reload();
+        // Event saat filter level diubah
+        $('#level_id').on('change', function() {
+            dataUser.ajax.reload();
+        });
+
+        // Event handler tombol "Tambah Ajax"
+        $(document).on('click', '.btn-modal', function(e) {
+            e.preventDefault();
+            var url = $(this).data('url');
+            if (url) {
+                modalAction(url);
+            } else {
+                console.warn('URL untuk modal tidak ditemukan!');
+            }
         });
     });
 </script>

@@ -1,6 +1,4 @@
 @empty($user) 
-    <div id="mainModal" class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Kesalahan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria- label="Close"><span aria-hidden="true">&times;</span></button>
@@ -11,8 +9,6 @@
                     Data yang anda cari tidak ditemukan</div>
                 <a href="{{ url('/user') }}" class="btn btn-warning">Kembali</a>
             </div>
-        </div>
-    </div> 
 @else
     <form action="{{ url('/user/' . $user->user_id.'/update_ajax') }}" method="POST" id="form-edit">
     @csrf
@@ -52,7 +48,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-            <button type="button" data-dismiss="modal" class="btn btn- warning">Batal</button>
+            <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
             <button type="submit" class="btn btn-primary">Simpan</button>
         </div>
     </div>
@@ -74,7 +70,7 @@ $(document).ready(function() {
                 data: $(form).serialize(),
                 success: function(response) {
                     if(response.status){
-                        $('#mainModal').modal('hide'); 
+                        $('#myModal').modal('hide'); 
                         Swal.fire({
                             icon: 'success', 
                             title: 'Berhasil', 
