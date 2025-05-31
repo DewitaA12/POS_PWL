@@ -78,25 +78,24 @@
 
 @push('js')
 <script> 
-    function modalAction(url = '') {
-        $('#myModal').load(url, function() {
+    function modalAction(url = ''){
+            $('#myModal').load(url,function(){
             $('#myModal').modal('show');
-        });
-    }
-
-    var dataUser;
-    $(document).ready(function() {
-        // Inisialisasi DataTable
-        dataUser = $('#table_user').DataTable({
-            serverSide: true,
-            ajax: {
-                url: "{{ url('user/list') }}", 
-                dataType: "json",
-                type: "POST",
-                data: function(d) {
-                    d.level_id = $('#level_id').val();
-                }
-            },
+            });
+        }
+        var dataUser;
+        $(document).ready(function(){
+            dataUser = $('#table_user').DataTable({
+                // serverSide: true, jika ingin menggunakan server side processing
+                serverSide: true,
+                ajax: {
+                    "url": "{{ url('user/list') }}",
+                    "dataType": "json",
+                    "type": "POST",
+                    "data": function (d) {
+                        d._level_id = $('#level_id').val();
+                    }
+                },
             columns: [
                 {
                     data: "DT_RowIndex", 
