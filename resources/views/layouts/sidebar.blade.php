@@ -12,7 +12,7 @@
   <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
       <li class="nav-item">
-        <a href="{{ url('/') }}" class="nav-link {{ ($activeMenu == 'dashboard') ? 'active' : '' }}">
+        <a href="{{ url('/welcome') }}" class="nav-link {{ ($activeMenu == 'dashboard') ? 'active' : '' }}">
           <i class="nav-icon fas fa-tachometer-alt"></i>
           <p>Dashboard</p>
         </a>
@@ -41,6 +41,12 @@
         <a href="{{ url('/barang') }}" class="nav-link {{ ($activeMenu == 'barang') ? 'active' : '' }}">
           <i class="nav-icon far fa-list-alt"></i>
           <p>Data Barang</p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ url('/supplier') }}" class="nav-link {{ ($activeMenu == 'supplier') ? 'active' : '' }}">
+          <i class="nav-icon fas fa-truck"></i>
+          <p>Data Supplier</p>
         </a>
       </li>
       <li class="nav-header">Data Transaksi</li>
