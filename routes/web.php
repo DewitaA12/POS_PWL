@@ -23,8 +23,9 @@ Route::group(['prefix' => 'user'], function () {
     Route::put('/{id}', [UserController::class, 'update']); // /menyimpan perubahan data user
     Route::get('/{id}/edit_ajax', [UserController::class, 'edit_ajax']); // /user/edit
     Route::put('/{id}/update_ajax', [UserController::class, 'update_ajax'])->name('user.update_ajax');
-    Route::get('/{id}/confirm_ajax', [UserController::class, 'confirm_ajax']);
-    Route::delete('/{id}/delete_ajax', [UserController::class, 'delete_ajax']);
+    Route::get('/{id}/delete_ajax', [UserController::class, 'confirm_ajax'])->name('user.confirm_ajax');
+    Route::delete('/{id}/delete_ajax', [UserController::class, 'delete_ajax'])->name('user.delete_ajax');
+    Route::get('/{id}/show_ajax', [UserController::class, 'show_ajax']);
     Route::delete('/{id}', [UserController::class, 'destroy']); // Menghapus data user by id
     Route::get('/{id}', [UserController::class, 'show']); // /user/detail
     Route::post('/', [UserController::class, 'tambah_simpan']); // /user (POST)
@@ -40,6 +41,13 @@ Route::group(['prefix' => 'level'], function(){
     Route::post('/list',[LevelController::class, 'list']);
     Route::get('/create', [LevelController::class, 'create']); 
     Route::post('/', [LevelController::class, 'store']);
+    Route::get('/create_ajax', [LevelController::class, 'create_ajax']); 
+    Route::post('/ajax',[LevelController::class, 'store_ajax']);
+    Route::get('/{id}/edit_ajax', [LevelController::class, 'edit_ajax']); // /level/edit
+    Route::put('/{id}/update_ajax', [LevelController::class, 'update_ajax'])->name('level.update_ajax');
+    Route::get('/{id}/show_ajax', [LevelController::class, 'show_ajax']);
+    Route::get('/{id}/delete_ajax', [LevelController::class, 'confirm_ajax'])->name('level.confirm_ajax');
+    Route::delete('/{id}/delete_ajax', [LevelController::class, 'delete_ajax'])->name('level.delete_ajax');
     Route::get('/{id}', [LevelController::class, 'show']); 
     Route::get('/{id}/edit', [LevelController::class, 'edit']);
     Route::put('/{id}', [LevelController::class, 'update']);
@@ -51,10 +59,17 @@ Route::group(['prefix' => 'kategori'], function(){
     Route::post('/list',[KategoriController::class, 'list']);
     Route::get('/create', [KategoriController::class, 'create']); 
     Route::post('/', [KategoriController::class, 'store']);
+    Route::get('/create_ajax', [KategoriController::class, 'create_ajax']); 
+    Route::post('/ajax',[KategoriController::class, 'store_ajax']);
     Route::get('/{id}', [KategoriController::class, 'show']); 
     Route::get('/{id}/edit', [KategoriController::class, 'edit']);
     Route::put('/{id}', [KategoriController::class, 'update']);
     Route::delete('/{id}', [KategoriController::class, 'destroy']);
+    Route::get('/{id}/edit_ajax', [KategoriController::class, 'edit_ajax']); 
+    Route::put('/{id}/update_ajax', [KategoriController::class, 'update_ajax'])->name('kategori.update_ajax');
+    Route::get('/{id}/show_ajax', [KategoriController::class, 'show_ajax']);
+    Route::get('/{id}/delete_ajax', [KategoriController::class, 'confirm_ajax'])->name('kategori.confirm_ajax');
+    Route::delete('/{id}/delete_ajax', [KategoriController::class, 'delete_ajax'])->name('kategori.delete_ajax');
 });
 
 Route::group(['prefix' => 'barang'], function(){
@@ -62,10 +77,17 @@ Route::group(['prefix' => 'barang'], function(){
     Route::post('/list',[BarangController::class, 'list']);
     Route::get('/create', [BarangController::class, 'create']); 
     Route::post('/', [BarangController::class, 'store']);
+    Route::get('/create_ajax', [BarangController::class, 'create_ajax']); 
+    Route::post('/ajax',[BarangController::class, 'store_ajax']);
     Route::get('/{id}', [BarangController::class, 'show']); 
     Route::get('/{id}/edit', [BarangController::class, 'edit']);
     Route::put('/{id}', [BarangController::class, 'update']);
     Route::delete('/{id}', [BarangController::class, 'destroy']);
+    Route::get('/{id}/edit_ajax', [BarangController::class, 'edit_ajax']); 
+    Route::put('/{id}/update_ajax', [BarangController::class, 'update_ajax'])->name('barang.update_ajax');
+    Route::get('/{id}/show_ajax', [BarangController::class, 'show_ajax']);
+    Route::get('/{id}/delete_ajax', [BarangController::class, 'confirm_ajax'])->name('barang.confirm_ajax');
+    Route::delete('/{id}/delete_ajax', [BarangController::class, 'delete_ajax'])->name('barang.delete_ajax');
     });
 
 Route::group(['prefix' => 'supplier'], function(){
@@ -73,8 +95,15 @@ Route::group(['prefix' => 'supplier'], function(){
     Route::post('/list',[SupplierController::class, 'list']);
     Route::get('/create', [SupplierController::class, 'create']); 
     Route::post('/', [SupplierController::class, 'store']);
+    Route::get('/create_ajax', [SupplierController::class, 'create_ajax'])->name('supplier.create_ajax'); 
+    Route::post('/ajax',[SupplierController::class, 'store_ajax'])->name('supplier.store_ajax');
     Route::get('/{id}', [SupplierController::class, 'show']); 
     Route::get('/{id}/edit', [SupplierController::class, 'edit']);
     Route::put('/{id}', [SupplierController::class, 'update']);
     Route::delete('/{id}', [SupplierController::class, 'destroy']);
+    Route::get('/{id}/edit_ajax', [SupplierController::class, 'edit_ajax']); 
+    Route::put('/{id}/update_ajax', [SupplierController::class, 'update_ajax'])->name('supplier.update_ajax');
+    Route::get('/{id}/show_ajax', [SupplierController::class, 'show_ajax']);
+    Route::get('/{id}/delete_ajax', [SupplierController::class, 'confirm_ajax'])->name('supplier.confirm_ajax');
+    Route::delete('/{id}/delete_ajax', [SupplierController::class, 'delete_ajax'])->name('supplier.delete_ajax');
     });
