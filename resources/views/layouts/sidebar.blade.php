@@ -62,6 +62,15 @@
           <p>Transaksi Penjualan</p>
         </a>
       </li>
+      <li class="nav-item mt-5">
+        <a href="{{ route('logout') }}"
+          onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+          class="nav-link">
+          <i class="nav-icon fas fa-sign-out-alt"></i>
+          <p>Logout</p>
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="GET" style="display: none;"></form>
+      </li>
     </ul>
   </nav>
 </div>
