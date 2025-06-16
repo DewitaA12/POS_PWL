@@ -80,6 +80,8 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/{id}/show_ajax', [KategoriController::class, 'show_ajax']);
         Route::get('/{id}/delete_ajax', [KategoriController::class, 'confirm_ajax'])->name('kategori.confirm_ajax');
         Route::delete('/{id}/delete_ajax', [KategoriController::class, 'delete_ajax'])->name('kategori.delete_ajax');
+        Route::get('/import', [KategoriController::class, 'import']);
+        Route::post('/import_ajax', [KategoriController::class, 'import_ajax']);
     });
 
         Route::prefix('barang')->middleware(['authorize:ADM,MNG,STF'])->group(function(){
