@@ -98,6 +98,8 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/{id}/show_ajax', [BarangController::class, 'show_ajax']);
         Route::get('/{id}/delete_ajax', [BarangController::class, 'confirm_ajax'])->name('barang.confirm_ajax');
         Route::delete('/{id}/delete_ajax', [BarangController::class, 'delete_ajax'])->name('barang.delete_ajax');
+        Route::get('/import',[BarangController::class,'import']);    
+        Route::post('/import_ajax',[BarangController::class,'import_ajax']);
         });
 
         Route::prefix('supplier')->middleware(['authorize:ADM,MNG'])->group(function(){
