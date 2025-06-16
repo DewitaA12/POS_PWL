@@ -62,6 +62,8 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/{id}/edit', [LevelController::class, 'edit']);
         Route::put('/{id}', [LevelController::class, 'update']);
         Route::delete('/{id}', [LevelController::class, 'destroy']);
+        Route::get('/import', [LevelController::class, 'import']);
+        Route::post('/import_ajax', [LevelController::class, 'import_ajax']);
     });
 
     Route::prefix('kategori')->middleware(['authorize:ADM,STF'])->group(function(){
