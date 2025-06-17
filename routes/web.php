@@ -7,7 +7,9 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\StokController;
 use Illuminate\Support\Facades\Route;
+use Monolog\Level;
 
 Route::pattern('id', '[0-9]+');
 
@@ -64,6 +66,7 @@ Route::middleware(['auth'])->group(function(){
         Route::delete('/{id}', [LevelController::class, 'destroy']);
         Route::get('/import', [LevelController::class, 'import']);
         Route::post('/import_ajax', [LevelController::class, 'import_ajax']);
+        Route::get('/export_excel', [LevelController::class, 'export_excel']); 
     });
 
     Route::prefix('kategori')->middleware(['authorize:ADM,STF'])->group(function(){
@@ -84,6 +87,7 @@ Route::middleware(['auth'])->group(function(){
         Route::delete('/{id}/delete_ajax', [KategoriController::class, 'delete_ajax'])->name('kategori.delete_ajax');
         Route::get('/import', [KategoriController::class, 'import']);
         Route::post('/import_ajax', [KategoriController::class, 'import_ajax']);
+        Route::get('/export_excel', [KategoriController::class, 'export_excel']); 
     });
 
         Route::prefix('barang')->middleware(['authorize:ADM,MNG,STF'])->group(function(){
@@ -104,6 +108,7 @@ Route::middleware(['auth'])->group(function(){
         Route::delete('/{id}/delete_ajax', [BarangController::class, 'delete_ajax'])->name('barang.delete_ajax');
         Route::get('/import',[BarangController::class,'import']);    
         Route::post('/import_ajax',[BarangController::class,'import_ajax']);
+        Route::get('/export_excel', [BarangController::class, 'export_excel']); 
         });
 
         Route::prefix('supplier')->middleware(['authorize:ADM,MNG'])->group(function(){
@@ -124,6 +129,28 @@ Route::middleware(['auth'])->group(function(){
         Route::delete('/{id}/delete_ajax', [SupplierController::class, 'delete_ajax'])->name('supplier.delete_ajax');
         Route::get('/import', [SupplierController::class, 'import']);
         Route::post('/import_ajax', [SupplierController::class, 'import_ajax']);
+        Route::get('/export_excel', [SupplierController::class, 'export_excel']); 
         });
+
+        Route::prefix('stok')->middleware(['authorize:ADM,MNG'])->group(function(){
+        Route::get('/', [StokController::class, 'index'])->name('stok.index');  
+        Route::post('/list', [StokController::class, 'list'])->name('stok.list');  
+        Route::get('/create', [StokController::class, 'create'])->name('stok.create'); 
+        Route::post('/', [StokController::class, 'store'])->name('stok.store');  
+        Route::get('/create_ajax', [StokController::class, 'createAjax'])->name('stok.create_ajax'); 
+        Route::post('/store_ajax', [StokController::class, 'storeAjax'])->name('stok.store_ajax'); 
+        Route::get('/{id}', [StokController::class, 'show'])->name('stok.show');       
+        Route::get('/{id}/show_ajax', [StokController::class, 'showAjax'])->name('stok.show_ajax');
+        Route::get('/{id}/edit_ajax', [StokController::class, 'editAjax'])->name('stok.edit_ajax'); 
+        Route::put('/{id}/update_ajax', [StokController::class, 'updateAjax'])->name('stok.update_ajax');   
+        Route::get('/{id}/delete_ajax', [StokController::class, 'confirmAjax'])->name('stok.delete_ajax'); 
+        Route::delete('/{id}/delete_ajax', [StokController::class, 'deleteAjax']);
+        Route::delete('/{id}', [StokController::class, 'destroy'])->name('stok.destroy');  
+        Route::get('/{id}/edit', [StokController::class, 'edit'])->name('stok.edit'); 
+        Route::put('/{id}', [StokController::class, 'update'])->name('stok.update');   
+        Route::get('/import', [StokController::class, 'import'])->name('stok.import'); 
+        Route::post('/import_ajax', [StokController::class, 'importAjax'])->name('stok.import_ajax');  
+        Route::get('/export_excel', [StokController::class, 'export_excel']); 
+    });
 
 });
