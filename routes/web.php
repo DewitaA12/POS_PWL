@@ -67,6 +67,7 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/import', [LevelController::class, 'import']);
         Route::post('/import_ajax', [LevelController::class, 'import_ajax']);
         Route::get('/export_excel', [LevelController::class, 'export_excel']); 
+        Route::get('/export_pdf', [LevelController::class, 'export_pdf']); 
     });
 
     Route::prefix('kategori')->middleware(['authorize:ADM,STF'])->group(function(){
@@ -88,6 +89,7 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/import', [KategoriController::class, 'import']);
         Route::post('/import_ajax', [KategoriController::class, 'import_ajax']);
         Route::get('/export_excel', [KategoriController::class, 'export_excel']); 
+        Route::get('/export_pdf', [KategoriController::class, 'export_pdf']); 
     });
 
         Route::prefix('barang')->middleware(['authorize:ADM,MNG,STF'])->group(function(){
@@ -109,6 +111,7 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/import',[BarangController::class,'import']);    
         Route::post('/import_ajax',[BarangController::class,'import_ajax']);
         Route::get('/export_excel', [BarangController::class, 'export_excel']); 
+        Route::get('/export_pdf', [BarangController::class, 'export_pdf']); 
         });
 
         Route::prefix('supplier')->middleware(['authorize:ADM,MNG'])->group(function(){
@@ -129,7 +132,8 @@ Route::middleware(['auth'])->group(function(){
         Route::delete('/{id}/delete_ajax', [SupplierController::class, 'delete_ajax'])->name('supplier.delete_ajax');
         Route::get('/import', [SupplierController::class, 'import']);
         Route::post('/import_ajax', [SupplierController::class, 'import_ajax']);
-        Route::get('/export_excel', [SupplierController::class, 'export_excel']); 
+        Route::get('/export_excel', [SupplierController::class, 'export_excel']);
+        Route::get('/export_pdf', [SupplierController::class, 'export_pdf']);  
         });
 
         Route::prefix('stok')->middleware(['authorize:ADM,MNG'])->group(function(){
@@ -151,6 +155,7 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/import', [StokController::class, 'import'])->name('stok.import'); 
         Route::post('/import_ajax', [StokController::class, 'importAjax'])->name('stok.import_ajax');  
         Route::get('/export_excel', [StokController::class, 'export_excel']); 
+        Route::get('/export_pdf', [StokController::class, 'export_pdf']); 
     });
 
 });

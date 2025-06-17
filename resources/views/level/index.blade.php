@@ -6,7 +6,8 @@
         <h3 class="card-title">{{ $page->title }}</h3>
         <div class="card-tools">
             <!-- <a class="btn btn-sm btn-primary mt-1" href="{{ url('level/create') }}">Tambah</a> -->
-            <a href="{{ url('/level/export_excel') }}" class="btn btn-sm btn-primary mt-1"><i class="fa fa-file-excel"></i> Export Level User</a>
+            <a href="{{ url('/level/export_excel') }}" class="btn btn-sm btn-primary mt-1"><i class="fa fa-file-excel"></i> Export Level Excel</a>
+            <a href="{{ url('/level/export_pdf') }}" class="btn btn-sm btn-danger mt-1"><i class="fa fa-file-pdf"></i> Export Level PDF</a>
             <button class="btn btn-sm btn-success mt-1 btn-modal" data-url="{{ url('level/create_ajax') }}">Tambah Ajax</button>
             <button class="btn btn-sm btn-info mt-1 btn-modal" data-url="{{ url('level/import') }}">Import</button>
         </div>
