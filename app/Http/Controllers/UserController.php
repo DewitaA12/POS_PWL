@@ -6,9 +6,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\UserModel;
 use App\Models\LevelModel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class UserController extends Controller
 {
@@ -409,4 +411,72 @@ class UserController extends Controller
 
         return redirect('/user');
     }
+
+     public function export_pdf(){
+        //ambil data yang akan di export
+        $user = UserModel::select('level_id', 'user_id', 'username', 'nama','password')
+        ->orderBy('level_id')
+        ->with('level')
+        ->get();
+
+        //use Barruvdh\DomPDF\Facade\\Pdf
+       $pdf = Pdf::loadView('user.export_pdf', ['user' =>$user]);
+       $pdf->setPaper('a4', 'potrait');
+       $pdf->setOption("isRemoteEnabled", true);
+       $pdf->render();
+
+       return $pdf->download('Data User '.date('Y-m-d H:i:s').'.pdf');
+   }
+
+  public function editProfil()
+    {
+    $breadcrumb = (object)[
+        'title' => 'Edit Profil',
+        'list' => [
+            ['title' => 'Home', 'url' => '/'],
+            ['title' => 'Edit Profil', 'url' => '/edit_profil']
+        ]
+    ];
+
+    $page = (object)[
+        'title' => 'Edit profil pengguna'
+    ];
+
+    return view('edit_profil', [
+        'breadcrumb' => $breadcrumb,
+        'page' => $page,
+        'activeMenu' => 'profil'
+    ]);
+    }
+
+
+   public function updateFoto(Request $request)
+    {
+    $request->validate([
+        'foto' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
+
+    $userId = Auth::id(); // dapatkan ID user yang login
+
+    // Ambil data user dari model
+    $user = UserModel::find($userId);
+
+    // Hapus foto lama jika ada dan bukan default
+    if ($user->foto && file_exists(public_path($user->foto)) && $user->foto !== 'uploads/foto_user/default.jpg') {
+        unlink(public_path($user->foto));
+    }
+
+    // Simpan foto baru
+    $file = $request->file('foto');
+    $filename = time() . '_' . $file->getClientOriginalName();
+    $file->move(public_path('uploads/foto_user'), $filename);
+
+    // Update langsung pakai Eloquent
+    UserModel::where('user_id', $userId)->update([
+        'foto' => 'uploads/foto_user/' . $filename,
+    ]);
+
+    return back()->with('success', 'Foto profil berhasil diperbarui.');
+    }
+
 }

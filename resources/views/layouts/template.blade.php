@@ -31,16 +31,19 @@
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="{{ url('/') }} class="brand-link">
-      <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">PWL - Starter Code</span>
+    <!-- Foto Profil -->
+    <a href="{{ url('/') }}" class="brand-link d-flex justify-content-center align-items-center"
+       style="height: 130px; padding-top: 15px; padding-bottom: 15px; border-bottom: none;">
+      <img src="{{ asset(Auth::user()->foto ?? 'uploads/foto_user/default.jpg') }}"
+        alt="Foto Profil"
+        class="img-circle elevation-2"
+        style="width: 100px; height: 100px; object-fit: cover;">
     </a>
 
     <!-- Sidebar -->
     @include('layouts.sidebar')
-    <!-- /.sidebar -->
-  </aside>
+</aside>
+
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -76,6 +79,7 @@
 <script src="{{ asset('adminlte/plugins/pdfmake/vfs_fonts.js') }}"></script>
 <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <!-- jquery validation -->
 <script src="{{ asset('adminlte/plugins/jquery-validation/jquery.validate.min.js') }}"></script>

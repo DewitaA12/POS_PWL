@@ -22,28 +22,30 @@ Route::post('register', [AuthController::class, 'store'])->name('store');
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/welcome', [WelcomeController::class, 'index']);
+    Route::get('/edit_profil', [UserController::class, 'editProfil']);
+    Route::post('/update-foto', [UserController::class, 'updateFoto'])->name('updateFoto');
 
     Route::prefix('user')->middleware(['authorize:ADM'])->group(function(){
-        Route::get('/', [UserController::class, 'index']); // /user
-        Route::post('/list', [UserController::class, 'list']); // /user/list
-        Route::get('/tambah', [UserController::class, 'tambah']); // /user/tambah
-        Route::get('/create', [UserController::class, 'create']); // /user/create
+        Route::get('/', [UserController::class, 'index']); 
+        Route::post('/list', [UserController::class, 'list']); 
+        Route::get('/tambah', [UserController::class, 'tambah']); 
+        Route::get('/create', [UserController::class, 'create']); 
         Route::post('/',[UserController::class, 'store']);
         Route::get('/create_ajax', [UserController::class, 'create_ajax']); 
         Route::post('/ajax',[UserController::class, 'store_ajax']);
-        Route::get('/{id}/edit', [UserController::class, 'edit']); // /user/edit
-        Route::put('/{id}', [UserController::class, 'update']); // /menyimpan perubahan data user
-        Route::get('/{id}/edit_ajax', [UserController::class, 'edit_ajax']); // /user/edit
+        Route::get('/{id}/edit', [UserController::class, 'edit']); 
+        Route::put('/{id}', [UserController::class, 'update']); 
+        Route::get('/{id}/edit_ajax', [UserController::class, 'edit_ajax']); 
         Route::put('/{id}/update_ajax', [UserController::class, 'update_ajax'])->name('user.update_ajax');
         Route::get('/{id}/delete_ajax', [UserController::class, 'confirm_ajax'])->name('user.confirm_ajax');
         Route::delete('/{id}/delete_ajax', [UserController::class, 'delete_ajax'])->name('user.delete_ajax');
         Route::get('/{id}/show_ajax', [UserController::class, 'show_ajax']);
-        Route::delete('/{id}', [UserController::class, 'destroy']); // Menghapus data user by id
-        Route::get('/{id}', [UserController::class, 'show']); // /user/detail
-        Route::post('/', [UserController::class, 'tambah_simpan']); // /user (POST)
-        Route::get('/ubah/{id}', [UserController::class, 'ubah']); // /user/ubah/1
-        Route::put('/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']); // /user/ubah_simpan/1
-        Route::get('/hapus/{id}', [UserController::class, 'hapus']); // /user/hapus/1
+        Route::delete('/{id}', [UserController::class, 'destroy']); 
+        Route::get('/{id}', [UserController::class, 'show']); 
+        Route::post('/', [UserController::class, 'tambah_simpan']); 
+        Route::get('/ubah/{id}', [UserController::class, 'ubah']); 
+        Route::put('/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']); 
+        Route::get('/hapus/{id}', [UserController::class, 'hapus']); 
         Route::get('/test-relasi', [UserController::class, 'testRelasi']);
         Route::get('/jumlah-pengguna', [UserController::class, 'jumlahPengguna']);
     });
@@ -55,7 +57,7 @@ Route::middleware(['auth'])->group(function(){
         Route::post('/', [LevelController::class, 'store']);
         Route::get('/create_ajax', [LevelController::class, 'create_ajax']); 
         Route::post('/ajax',[LevelController::class, 'store_ajax']);
-        Route::get('/{id}/edit_ajax', [LevelController::class, 'edit_ajax']); // /level/edit
+        Route::get('/{id}/edit_ajax', [LevelController::class, 'edit_ajax']); 
         Route::put('/{id}/update_ajax', [LevelController::class, 'update_ajax'])->name('level.update_ajax');
         Route::get('/{id}/show_ajax', [LevelController::class, 'show_ajax']);
         Route::get('/{id}/delete_ajax', [LevelController::class, 'confirm_ajax'])->name('level.confirm_ajax');
